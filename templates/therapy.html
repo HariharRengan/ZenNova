@@ -1,99 +1,57 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Therapy Chat</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f5f5f5;
-            margin: 0;
-            padding: 0;
-        }
-        .chat-container {
-            max-width: 800px;
-            margin: 50px auto;
-            background: white;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            overflow: hidden;
-        }
-        .chat-header {
-            background: #007bff;
-            color: white;
-            padding: 20px;
-            text-align: center;
-        }
-        .chat-history {
-            padding: 20px;
-            height: 400px;
-            overflow-y: scroll;
-            border-bottom: 1px solid #ddd;
-        }
-        .chat-message {
-            margin-bottom: 20px;
-        }
-        .chat-message.user {
-            text-align: right;
-        }
-        .chat-message.bot {
-            text-align: left;
-        }
-        .chat-message p {
-            display: inline-block;
-            padding: 10px 20px;
-            border-radius: 20px;
-            max-width: 70%;
-        }
-        .chat-message.user p {
-            background: #007bff;
-            color: white;
-        }
-        .chat-message.bot p {
-            background: #f1f1f1;
-            color: #333;
-        }
-        .chat-input {
-            display: flex;
-            padding: 20px;
-            background: #f5f5f5;
-        }
-        .chat-input input {
-            flex: 1;
-            padding: 10px;
-            border: 1px solid #ddd;
-            border-radius: 20px;
-            outline: none;
-        }
-        .chat-input button {
-            background: #007bff;
-            color: white;
-            border: none;
-            padding: 10px 20px;
-            border-radius: 20px;
-            margin-left: 10px;
-            cursor: pointer;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Therapy Chat</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+  <style>
+    /* Glassmorphism style */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border-radius: 1rem;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+  </style>
 </head>
-<body>
-    <div class="chat-container">
-        <div class="chat-header">
-            <h1>Wellbeing Companion</h1>
-        </div>
-        <div class="chat-history">
-            {% for message in history %}
-                <div class="chat-message {{ loop.index % 2 == 0 and 'bot' or 'user' }}">
-                    <p>{{ message }}</p>
-                </div>
-            {% endfor %}
-        </div>
-        <form class="chat-input" method="POST">
-            <input type="text" name="prompt" placeholder="Type your message..." required>
-            <button type="submit"><i class="fas fa-paper-plane"></i></button>
-        </form>
+<body class="bg-gradient-to-r from-green-300 to-blue-500 min-h-screen flex flex-col items-center py-8">
+  <nav class="w-full bg-white bg-opacity-90 shadow fixed top-0">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="#" class="text-xl font-bold text-gray-800">Zennova</a>
+      <div class="space-x-4">
+        <a href="index.html" class="text-gray-800 hover:text-gray-600">Home</a>
+        <a href="fitness.html" class="text-gray-800 hover:text-gray-600">Fitness</a>
+        <a href="companion.html" class="text-gray-800 hover:text-gray-600">Well-being Companion</a>
+        <a href="sleeptracker.html" class="text-gray-800 hover:text-gray-600">Sleep Tracker</a>
+      </div>
     </div>
+  </nav>
+  <div class="max-w-xl w-full mx-auto p-8 glass-card mt-20">
+    <div class="bg-blue-600 text-white p-4 rounded-t-md text-center">
+      <h1 class="text-xl font-bold">Wellbeing Companion</h1>
+    </div>
+    <div class="p-4 h-80 overflow-y-scroll border-b border-gray-300">
+      {% for message in history %}
+        {% if loop.index % 2 == 0 %}
+          <div class="mb-4 text-left">
+            <p class="inline-block bg-gray-200 text-gray-800 p-2 rounded-full max-w-[70%]">{{ message }}</p>
+          </div>
+        {% else %}
+          <div class="mb-4 text-right">
+            <p class="inline-block bg-blue-600 text-white p-2 rounded-full max-w-[70%]">{{ message }}</p>
+          </div>
+        {% endif %}
+      {% endfor %}
+    </div>
+    <form class="flex p-4" method="POST">
+      <input type="text" name="prompt" placeholder="Type your message..." required class="flex-1 border border-gray-300 rounded-full p-2 focus:outline-none focus:ring-2 focus:ring-blue-200">
+      <button type="submit" class="bg-blue-600 text-white p-2 rounded-full ml-2 hover:bg-blue-700 transition-colors">
+        <i class="fas fa-paper-plane"></i>
+      </button>
+    </form>
+  </div>
 </body>
 </html>

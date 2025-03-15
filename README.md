@@ -1,6 +1,6 @@
 # ZenNova: Your All-in-One Mental Health Assistant
 
-Zennova is a comprehensive mental health assistant designed to support your overall well-being. It integrates multiple wellness features to help you maintain a balanced and healthy lifestyle:
+ZenNova is a comprehensive mental health assistant designed to support your overall well-being. It integrates multiple wellness features to help you maintain a balanced and healthy lifestyle:
 
 - **Meditation Assistant** – Utilizes sound-based healing and guided meditation techniques to promote relaxation and mindfulness.
 - **Exercise Expert** – Creates a personalized workout plan tailored to your dietary intake, ensuring accessibility for beginners.
@@ -10,7 +10,7 @@ Zennova is a comprehensive mental health assistant designed to support your over
 
 ## Meditation Assistant
 
-Zennova’s Meditation Assistant focuses on sound-based healing and guided meditation techniques, helping you achieve a state of relaxation and mindfulness.
+ZenNova’s Meditation Assistant focuses on sound-based healing and guided meditation techniques, helping you achieve a state of relaxation and mindfulness.
 
 ## Food Monitor
 
@@ -26,5 +26,5 @@ The Sleep Planner helps you establish a structured bedtime routine, ensuring res
 
 ## Wellbeing Companion
 
-Zennova’s Wellbeing Companion provides encouragement, and motivation to support your mental and emotional wellness, keeping you on track toward a healthier you.
+ZenNova’s Wellbeing Companion provides encouragement, and motivation to support your mental and emotional wellness, keeping you on track toward a healthier you.
 

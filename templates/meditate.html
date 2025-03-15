@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Meditate</title>
+    <style>
+        body, html {
+            height: 100%;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: url('{{ image }}') no-repeat center center fixed;
+            background-size: cover;
+            font-family: Arial, sans-serif;
+        }
+        .controls {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            background: rgba(0, 0, 0, 0.5);
+            padding: 10px;
+            border-radius: 10px;
+        }
+        .controls button, .controls input[type="range"], .controls a {
+            margin: 0 10px;
+            padding: 10px;
+            border: none;
+            border-radius: 5px;
+            background: #fff;
+            cursor: pointer;
+            text-decoration: none;
+            color: #000;
+        }
+    </style>
+</head>
+<body>
+    <div class="img-container">
+        <img src="{{ image }}" alt="Meditation Image">
+    </div>
+    <audio id="meditationAudio" src="/{{audio}}" autoplay loop></audio>
+    <div class="controls">
+        <button onclick="document.getElementById('meditationAudio').play()">Play</button>
+        <button onclick="document.getElementById('meditationAudio').pause()">Pause</button>
+        <button onclick="document.getElementById('meditationAudio').currentTime -= 10">Rewind 10s</button>
+        <input type="range" min="0.5" max="2" step="0.1" value="1" onchange="document.getElementById('meditationAudio').playbackRate = this.value">
+        <a href="/{{audio}}" download="meditation.mp3">Download (Tracks will be deleted in 1 day)</a>
+    </div>
+</body>
+</html>

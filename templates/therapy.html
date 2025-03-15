@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Therapy Chat</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+        }
+        .chat-container {
+            max-width: 800px;
+            margin: 50px auto;
+            background: white;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+        }
+        .chat-header {
+            background: #007bff;
+            color: white;
+            padding: 20px;
+            text-align: center;
+        }
+        .chat-history {
+            padding: 20px;
+            height: 400px;
+            overflow-y: scroll;
+            border-bottom: 1px solid #ddd;
+        }
+        .chat-message {
+            margin-bottom: 20px;
+        }
+        .chat-message.user {
+            text-align: right;
+        }
+        .chat-message.bot {
+            text-align: left;
+        }
+        .chat-message p {
+            display: inline-block;
+            padding: 10px 20px;
+            border-radius: 20px;
+            max-width: 70%;
+        }
+        .chat-message.user p {
+            background: #007bff;
+            color: white;
+        }
+        .chat-message.bot p {
+            background: #f1f1f1;
+            color: #333;
+        }
+        .chat-input {
+            display: flex;
+            padding: 20px;
+            background: #f5f5f5;
+        }
+        .chat-input input {
+            flex: 1;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 20px;
+            outline: none;
+        }
+        .chat-input button {
+            background: #007bff;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 20px;
+            margin-left: 10px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <div class="chat-container">
+        <div class="chat-header">
+            <h1>Wellbeing Companion</h1>
+        </div>
+        <div class="chat-history">
+            {% for message in history %}
+                <div class="chat-message {{ loop.index % 2 == 0 and 'bot' or 'user' }}">
+                    <p>{{ message }}</p>
+                </div>
+            {% endfor %}
+        </div>
+        <form class="chat-input" method="POST">
+            <input type="text" name="prompt" placeholder="Type your message..." required>
+            <button type="submit"><i class="fas fa-paper-plane"></i></button>
+        </form>
+    </div>
+</body>
+</html>

@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step 2 - Journal</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        const languageMap = {
+            'English': 'en-US',
+            'Spanish': 'es-ES',
+            'French': 'fr-FR',
+            'German': 'de-DE',
+            'Italian': 'it-IT',
+            'Portuguese': 'pt-PT',
+            'Russian': 'ru-RU',
+            'Chinese (Simplified)': 'zh-CN',
+            'Japanese': 'ja-JP',
+            'Korean': 'ko-KR',
+            'Hindi': 'hi-IN',
+            'Arabic': 'ar-SA',
+            'Bengali': 'bn-BD',
+            'Turkish': 'tr-TR'
+        };
+
+        const recognition = new webkitSpeechRecognition();
+        
+        function startSpeechToText1() {
+            let selectedLanguage = document.getElementById('lang').value;
+            if (!('webkitSpeechRecognition' in window)) {
+                alert('Your browser does not support speech recognition.');
+                return;
+            }
+            recognition.lang = selectedLanguage;
+            recognition.onresult = function(event) {
+                document.getElementById('selfdata').value += event.results[0][0].transcript;
+            };
+            recognition.start();
+        }
+        function startSpeechToText2() {
+            let selectedLanguage = document.getElementById('lang').value;
+            if (!('webkitSpeechRecognition' in window)) {
+                alert('Your browser does not support speech recognition.');
+                return;
+            }
+            recognition.lang = selectedLanguage;
+            recognition.onresult = function(event) {
+                console.log(event.results[0][0].transcript);
+                document.getElementById('journal').value += event.results[0][0].transcript;
+            };
+            recognition.start();
+        }
+    </script>
+</head>
+<body class="flex flex-col items-center justify-center min-h-screen bg-gray-100">
+    <form action="/journal" method="POST" class="w-full max-w-lg p-4 bg-white rounded-lg shadow-md">
+        <select id="lang" name="lang" class="w-full p-2 mb-4 border rounded-md">
+            <script>
+                for (const [name, value] of Object.entries(languageMap)) {
+                    document.write(`<option value="${value}">${name}</option>`);
+                }
+            </script>
+        </select>
+        <h2>Tell us about yourself</h2>
+        <textarea id="selfdata" name="selfdata" class="w-full h-48 p-2 mb-4 border rounded-md resize-none">{{p1}}</textarea>
+        <div class="flex justify-between">
+            <button type="button" onclick="startSpeechToText1()" class="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600">Use Microphone</button>
+        </div><br>
+        <h2>Tell us about your day today</h2>
+        <textarea id="journal" name="journal" class="w-full h-48 p-2 mb-4 border rounded-md resize-none">{{p2}}</textarea>
+        <div class="flex justify-between">
+            <button type="button" onclick="startSpeechToText2()" class="px-4 py-2 text-white bg-blue-500 rounded-md hover:bg-blue-600">Use Microphone</button>
+            <button type="submit" class="px-4 py-2 text-white bg-green-500 rounded-md hover:bg-green-600">Submit</button>
+        </div>
+    </form>
+</body>
+</html>

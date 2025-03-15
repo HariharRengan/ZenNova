@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Step 1 - Mood</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            margin: 0;
+            padding: 0;
+            align-items: center;
+            text-align: center;
+        }
+        #main {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            height: 100vh;
+            margin: 0;
+        }
+        .mood-option {
+            flex: 1 1 20%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-decoration: none;
+            font-size: 5rem;
+            transition: transform 0.3s;
+        }
+        .mood-option:hover {
+            transform: scale(1.1);
+        }
+        .mood-text {
+            font-size: 1rem;
+            margin-top: 0.5rem;
+        }
+        @media (max-width: 768px) {
+            .mood-option {
+                flex: 1 1 100%;
+            }
+        }
+        a {
+            color: black;
+        }
+    </style>
+</head>
+<body>
+    <h1>Step 1: How are you feeling?</h1>
+    <div id="main">
+        <a href="/mood/anger" class="mood-option">😡<span class="mood-text">Anger</span></a>
+        <a href="/mood/sadness" class="mood-option">😢<span class="mood-text">Sadness</span></a>
+        <a href="/mood/tired" class="mood-option">😴<span class="mood-text">Tired</span></a>
+        <a href="/mood/relaxed" class="mood-option">😌<span class="mood-text">Relaxed</span></a>
+        <a href="/mood/happy" class="mood-option">😊<span class="mood-text">Happy</span></a>
+    </div>
+</body>
+</html>

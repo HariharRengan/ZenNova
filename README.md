@@ -1,4 +1,4 @@
-# Zennova: Your All-in-One Mental Health Assistant
+# ZenNova: Your All-in-One Mental Health Assistant
 
 Zennova is a comprehensive mental health assistant designed to support your overall well-being. It integrates multiple wellness features to help you maintain a balanced and healthy lifestyle:
 

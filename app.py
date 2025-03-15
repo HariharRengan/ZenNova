@@ -2,15 +2,17 @@ from flask import Flask, render_template, request, redirect, url_for, session, s
 from meditater import main
 from therapy import generate_therapy
 from fitness import generate_fitness
-import os
+
+import os, base64
 import time, sqlite3
 
 app = Flask(__name__)
 app.secret_key = os.urandom(24)
 
-conn = sqlite3.connect('meditater.db')
+conn = sqlite3.connect('meditater.db', check_same_thread=False)
 c = conn.cursor()
 c.execute('''CREATE TABLE IF NOT EXISTS tracks (name TEXT, time INTEGER)''')
+c.execute('''CREATE TABLE IF NOT EXISTS workouts (name TEXT, time INTEGER)''')
 conn.commit()
 
 @app.route('/')
@@ -66,7 +68,7 @@ def meditate():
         lang = session['lang']
         track = session['track']
         mixed_audio, cover_image = main(user_day, feeling, track, lang)
-        session['mixed_audio'] = mixed_audio 
+        session['mixed_audio'] = mixed_audio
         session['cover_image'] = cover_image
         session['redo'] = False
         print('Meditation complete')
@@ -89,13 +91,23 @@ def therapy():
 
 @app.route('/fitness', methods=['GET', 'POST'])
 def fitness():
+    c.execute('DELETE FROM workouts WHERE time < ?', (int(time.time()) - 86400,))
+    conn.commit()
     if request.method == 'POST':
-        img = request.files['image']
-        fridge = request.form['fridge']
-        odata = request.form['odata']
-        response = generate_fitness(img, fridge, odata)
-        return render_template('fitness.html', response=response)
-    return render_template('fitness.html')
+        img = request.files['fridgeImage']
+        img_data = img.read()
+        img_base64 = base64.b64encode(img_data).decode('utf-8')
+        fridge = request.form['fridgeDescription']
+        odata = request.form['extraComments']
+        language = request.form['lang'] if request.form['lang'] == 'zh-CN' else request.form['lang'][:2]
+        a, b, c1 = generate_fitness(img_base64, fridge, odata, language)
+        session['audio'] = a
+        session['diet'] = b.replace('#', '\n')
+        session['exercise'] = c1
+        conn.execute('INSERT INTO workouts VALUES (?, ?)', (a, int(time.time())))
+        conn.commit()
+        return render_template('fitness.html', audio = session['audio'], exercise = session['exercise'], diet = session['diet'])
+    return render_template('fitness.html', audio = session.get('audio', None), exercise = session.get('exercise', None), diet = session.get('diet', None))
 
 if __name__ == '__main__':
     app.run(debug=True)

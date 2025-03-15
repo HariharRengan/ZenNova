@@ -76,7 +76,7 @@ def mix_audio(speech_file_path, background_file_path):
 
 def generate_cover_image(user_prompt):
     prompt =  f""" Generate a visually appealing cover image for a meditation audio that aligns with the user's current emotional state. 
-    Here is how the user is feeling: {user_prompt} NO TEXT AT ALL NO TEXT AT ALL NO TEXT AT ALL 
+    Here is how the user is feeling: \n{user_prompt} NO TEXT AT ALL NO TEXT AT ALL NO TEXT AT ALL 
     """
     response = client.images.generate(
         model="dall-e-3",

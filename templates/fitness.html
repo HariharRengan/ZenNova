@@ -16,16 +16,63 @@
       border: 1px solid rgba(255, 255, 255, 0.3);
     }
   </style>
+  <!-- Inline JavaScript for Speech-to-Text -->
+  <script>
+    // Language map for the dropdown
+    const languageMap = {
+      'English': 'en-US',
+      'Spanish': 'es-ES',
+      'French': 'fr-FR',
+      'German': 'de-DE',
+      'Italian': 'it-IT',
+      'Portuguese': 'pt-PT',
+      'Russian': 'ru-RU',
+      'Chinese (Simplified)': 'zh-CN',
+      'Japanese': 'ja-JP',
+      'Korean': 'ko-KR',
+      'Hindi': 'hi-IN',
+      'Arabic': 'ar-SA',
+      'Bengali': 'bn-BD',
+      'Turkish': 'tr-TR'
+    };
+
+    const recognition = new webkitSpeechRecognition();
+
+    function startSpeechToText1() {
+      if (!('webkitSpeechRecognition' in window)) {
+        alert('Your browser does not support speech recognition.');
+        return;
+      }
+      recognition.lang = 'en-US';
+      recognition.onresult = function(event) {
+        document.getElementById('fridgeDescription').value += event.results[0][0].transcript;
+      };
+      recognition.start();
+    }
+
+    function startSpeechToText2() {
+      if (!('webkitSpeechRecognition' in window)) {
+        alert('Your browser does not support speech recognition.');
+        return;
+      }
+      recognition.lang = 'en-US';
+      recognition.onresult = function(event) {
+        document.getElementById('extraComments').value += event
+        .results[0][0].transcript; 
+      };
+      recognition.start();
+    }
+  </script>
 </head>
 <body class="bg-gradient-to-r from-green-300 to-blue-500 min-h-screen flex flex-col items-center py-8">
   <nav class="w-full bg-white bg-opacity-90 shadow fixed top-0">
     <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
-      <a href="#" class="text-xl font-bold text-gray-800">Zennova</a>
+      <a href="/" class="text-xl font-bold text-gray-800">ZenNova</a>
       <div class="space-x-4">
-        <a href="index.html" class="text-gray-800 hover:text-gray-600">Home</a>
-        <a href="fitness.html" class="text-gray-800 hover:text-gray-600">Fitness</a>
-        <a href="companion.html" class="text-gray-800 hover:text-gray-600">Well-being Companion</a>
-        <a href="sleeptracker.html" class="text-gray-800 hover:text-gray-600">Sleep  Tracker</a>
+        <a href="/mood" class="text-gray-800 hover:text-gray-600">Meditation</a>
+        <a href="/fitness" class="text-gray-800 hover:text-gray-600">Fitness</a>
+        <a href="/wellbeing-companion" class="text-gray-800 hover:text-gray-600">Well-being Companion</a>
+        <a href="/sleep" class="text-gray-800 hover:text-gray-600">Sleep Tracker</a>
       </div>
     </div>
   </nav>
@@ -34,8 +81,14 @@
     <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">
       Create Your Personalized Diet Plan
     </h1>
-    <form id="dietForm" onsubmit="return validateForm(event)" novalidate class="space-y-6">
-      <!-- Fridge Image Input -->
+    <form id="dietForm" action="/fitness" method='POST' class="space-y-6" enctype="multipart/form-data" onsubmit="return validateForm(event)" novalidate>
+      <select id="lang" name="lang" class="w-full p-2 mb-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200">
+        <script>
+          for (const [name, value] of Object.entries(languageMap)) {
+              document.write(`<option value="${value}">${name}</option>`);
+          }
+        </script>
+      </select>
       <div>
         <label for="fridgeImage" class="block text-gray-700 font-medium mb-2">
           Upload a Picture of Your Fridge
@@ -60,11 +113,13 @@
           placeholder="Describe your fridge contents"
           class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
         ></textarea>
+        <button type="button" onclick="startSpeechToText1()" class="px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors font-semibold">Use Microphone</button>
+
       </div>
       <!-- Extra Comments -->
       <div>
         <label for="extraComments" class="block text-gray-700 font-medium mb-2">
-          Extra Comments
+          Extra Comments (such as dietary restrictions, schedules, and excercise routines)
         </label>
         <textarea
           id="extraComments"
@@ -73,6 +128,7 @@
           placeholder="Any additional comments"
           class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
         ></textarea>
+        <button type="button" onclick="startSpeechToText2()" class="px-4 py-2 text-white bg-blue-600 rounded-md hover:bg-blue-700 transition-colors font-semibold">Use Microphone</button>
       </div>
       <!-- Error Message -->
       <div id="errorMessage" class="text-red-500 text-sm hidden"></div>
@@ -90,7 +146,21 @@
   <div id="aiResponseContainer" class="max-w-xl w-full mx-auto p-6 mt-8 glass-card">
     <h2 class="text-xl font-semibold text-gray-800 mb-2">AI Response</h2>
     <p id="aiResponseText" class="text-gray-600">
-      Your AI response will appear here...
+      <strong>Diet Plan:</strong>
+      <span>{{ diet }}</span>
+      <br>
+      <strong>Exercise Routine:</strong>
+      <span>{{ exercise }}</span>
+      <br>
+      <strong>Audio Guide:</strong>
+      <div class="flex flex-wrap justify-center items-center space-x-4">
+        <audio id="meditationAudio" src="/{{audio}}" loop class="hidden"></audio>
+        <button onclick="document.getElementById('meditationAudio').play()" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-semibold">Play</button>
+        <button onclick="document.getElementById('meditationAudio').pause()" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-semibold">Pause</button>
+        <button onclick="document.getElementById('meditationAudio').currentTime -= 10" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-semibold">Rewind 10s</button>
+        <input type="range" min="0.5" max="2" step="0.1" value="1" onchange="document.getElementById('meditationAudio').playbackRate = this.value" class="w-32">
+        <a href="/{{audio}}" download="meditation.mp3" class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors font-semibold">Download (Tracks will be deleted in 1 day)</a>
+      </div>
     </p>
   </div>
 
@@ -114,7 +184,7 @@
       // At least one of these fields must be provided
       if (!imageProvided && !descriptionProvided) {
         errorMessageDiv.textContent =
-          "Please provide either a picture of your fridge or a description of its contents.";
+          "Please provide either a picture of your fridge, a description of its contents, or both.";
         errorMessageDiv.classList.remove("hidden");
         e.preventDefault();
         return false;

@@ -1,15 +1,14 @@
 from pydub import AudioSegment
 from pathlib import Path
-import random, string
 
 import openai
 from openai import OpenAI
 
-from deep_translator import GoogleTranslator
-
 import dotenv
 import os
-import time
+import time, random
+
+from m_funcs import translate, rand_string
 
 dotenv.load_dotenv()
 
@@ -18,14 +17,6 @@ openai.api_key = API_KEY
 tracks = ['ambient', 'eastern', 'nature']
 
 client = OpenAI()
-
-def rand_string(n):
-    return ''.join(random.choices(string.ascii_lowercase + string.digits, k=n))
-
-def translate(text, lang1, lang2):
-    translator = GoogleTranslator(source=lang1, target=lang2)
-    translated_text = translator.translate(text)
-    return translated_text
 
 def generate_meditation_script(user_prompt):
     client = OpenAI(api_key=API_KEY)
@@ -53,8 +44,8 @@ def text_to_speech(text):
     return filename
 
 def select_background_audio(track):
-    # return 'audio\\' + (track if track != 'random' else random.choice(tracks)) + '.mp3'
-    return 'audio\\' + 'background_audio' + '.mp3'
+    return 'audio\\' + (track if track != 'random' else random.choice(tracks)) + '.mp3'
+    # return 'audio\\' + 'background_audio' + '.mp3'
 
 def mix_audio(speech_file_path, background_file_path):
     """Mixes speech with background music into one audio file."""

@@ -2,7 +2,7 @@ import base64, random, string, time
 from openai import OpenAI
 from pathlib import Path
 
-from deep_translator import GoogleTranslator
+from m_funcs import translate, rand_string
 
 import dotenv, os
 
@@ -14,14 +14,6 @@ def encode_image(image_path):
     """Encodes an image to base64 format."""
     with open(image_path, "rb") as image_file:
         return base64.b64encode(image_file.read()).decode("utf-8")
-    
-def rand_string(n):
-    return ''.join(random.choices(string.ascii_lowercase + string.digits, k=n))
-
-def translate(text, lang1, lang2):
-    translator = GoogleTranslator(source=lang1, target=lang2)
-    translated_text = translator.translate(text)
-    return translated_text
 
 def diet_plan(base64_image, user_input, extra):
     """Identifies food items from an image of a fridge."""

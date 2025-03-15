@@ -65,12 +65,25 @@
         <p class="text-xl text-gray-700">1.5 hrs</p>
       </div>
     </div>
-    
     <!-- AI Summary Section -->
     <div class="glass-card p-6">
-      <h4 class="text-xl font-semibold text-gray-800 mb-2">AI Summary</h4>
-      <textarea class="w-full p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200" rows="4" placeholder="Your AI summary will appear here..."></textarea>
-    </div>
-  </div>
+      <form action="/sleep" method="POST">
+      <h4 class="text-xl font-semibold text-gray-800 mb-2">Sleep information</h4>
+      <textarea id='sleepData' name='sleepData' class="w-full p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200" rows="4" placeholder="Sleep analysis">{{info}}</textarea>
+      <textarea style="display:none" id='hsleepData' name='hsleepData'></textarea>
+      <button type="submit" class="bg-blue-500 text-white px-4 py-2 rounded-full shadow hover:bg-blue-600 transition-colors">Submit</button></form></div>
+  <script>
+        const sleepData = {
+          totalHoursSlept: document.querySelector('.grid:nth-of-type(1) .glass-card:nth-child(1) p').textContent,
+          weeklyAverage: document.querySelector('.grid:nth-of-type(1) .glass-card:nth-child(2) p').textContent,
+          sleepStates: {
+            awake: document.querySelector('.grid:nth-of-type(2) .glass-card:nth-child(1) p').textContent,
+            rem: document.querySelector('.grid:nth-of-type(2) .glass-card:nth-child(2) p').textContent,
+            core: document.querySelector('.grid:nth-of-type(2) .glass-card:nth-child(3) p').textContent,
+            deep: document.querySelector('.grid:nth-of-type(2) .glass-card:nth-child(4) p').textContent
+          }
+        };
+        document.getElementById('hsleepData').value = JSON.stringify(sleepData);
+    </script>
 </body>
 </html>

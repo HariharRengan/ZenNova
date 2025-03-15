@@ -2,6 +2,7 @@ from flask import Flask, render_template, request, redirect, url_for, session, s
 from meditater import main
 from therapy import generate_therapy
 from fitness import generate_fitness
+from sleep import create_profile
 
 import os, base64
 import time, sqlite3
@@ -108,6 +109,13 @@ def fitness():
         conn.commit()
         return render_template('fitness.html', audio = session['audio'], exercise = session['exercise'], diet = session['diet'])
     return render_template('fitness.html', audio = session.get('audio', None), exercise = session.get('exercise', None), diet = session.get('diet', None))
+
+@app.route('/sleep', methods=['GET', 'POST'])
+def sleep():
+    if request.method == 'POST':
+        sleep_data = create_profile(request.form['sleepData'] + '\nSleep Data:' + request.form['hsleepData'])
+        return render_template('sleep.html', info=sleep_data)
+    return render_template('sleep.html')
 
 if __name__ == '__main__':
     app.run(debug=True)

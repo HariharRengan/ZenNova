@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mental Health Check</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Google Fonts -->
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet" />
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    body {
+      font-family: 'Montserrat', sans-serif;
+    }
+    /* Glassmorphism style for containers */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border-radius: 1rem;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-r from-green-300 to-blue-500 min-h-screen">
+  <!-- Navbar -->
+  <nav class="w-full bg-white bg-opacity-90 shadow fixed top-0">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="#" class="text-xl font-bold text-gray-800">Zennova</a>
+      <div class="space-x-4">
+        <a href="index.html" class="text-gray-800 hover:text-gray-600">Home</a>
+        <a href="fitness.html" class="text-gray-800 hover:text-gray-600">Fitness</a>
+        <a href="companion.html" class="text-gray-800 hover:text-gray-600">Well-being Companion</a>
+        <a href="sleeptracker.html" class="text-gray-800 hover:text-gray-600">Sleep  Tracker</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Hero Section -->
+  <section class="pt-24">
+    <div class="max-w-7xl mx-auto px-4">
+      <div class="relative glass-card p-8 text-center">
+        <h1 class="text-4xl font-bold text-gray-800 mb-4">Welcome to Your Mental Health Journey</h1>
+        <p class="text-lg text-gray-700 mb-6">Discover resources and guidance to nurture your mind and soul.</p>
+        <a href="process.html" class="inline-block bg-blue-600 text-white py-3 px-6 rounded-md hover:bg-blue-700 transition-colors font-semibold">Get Started</a>
+      </div>
+    </div>
+  </section>
+
+  <!-- What We Do Section -->
+  <section class="py-12">
+    <div class="max-w-4xl mx-auto px-4">
+      <h2 class="text-2xl font-bold text-center text-gray-800 mb-6">What We Do</h2>
+      <div class="glass-card p-6" contenteditable="true">
+        Zennova is a smart wellness app designed to enhance sleep, nutrition, and mental well-being. It tracks sleep patterns, creates personalized schedules, and offers guided meditations for relaxation. Using your fridge inventory, it generates tailored diet and exercise plans. With an AI companion always available for support, Zennova helps you stay balanced and healthy.
+      </div>
+    </div>
+  </section>
+
+  <!-- Features Section -->
+  <section class="py-12">
+    <div class="max-w-7xl mx-auto px-4">
+      <h2 class="text-2xl font-bold text-center text-gray-800 mb-8">Features</h2>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <!-- Feature 1 -->
+        <div class="glass-card p-6 text-center">
+          <i class="fas fa-headphones-alt text-3xl mb-3 text-blue-600"></i>
+          <h5 class="text-xl font-semibold text-gray-800 mb-2">Personalized Meditation Soundtrack</h5>
+          <p class="text-gray-700">
+            Experience a tailored meditation journey with soundtracks uniquely crafted to reflect your emotional state, promoting mindfulness and inner balance.
+          </p>
+        </div>
+        <!-- Feature 2 -->
+        <div class="glass-card p-6 text-center">
+          <i class="fas fa-brain text-3xl mb-3 text-green-600"></i>
+          <h5 class="text-xl font-semibold text-gray-800 mb-2">AI-Powered Therapy Assistant</h5>
+          <p class="text-gray-700">
+            Harness advanced artificial intelligence to gain insightful understanding of your challenges, delivering empathetic support and professional guidance.
+          </p>
+        </div>
+        <!-- Feature 3 -->
+        <div class="glass-card p-6 text-center">
+          <i class="fas fa-dumbbell text-3xl mb-3 text-yellow-600"></i>
+          <h5 class="text-xl font-semibold text-gray-800 mb-2">Intelligent Fitness & Wellness Coach</h5>
+          <p class="text-gray-700">
+            Enjoy customized meal plans based on available ingredients, personalized exercise routines, and soothing sleep soundtracks to ensure restorative rest.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+</body>
+</html>

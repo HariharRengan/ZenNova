@@ -1,54 +1,44 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Meditate</title>
-    <style>
-        body, html {
-            height: 100%;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: url('{{ image }}') no-repeat center center fixed;
-            background-size: cover;
-            font-family: Arial, sans-serif;
-        }
-        .controls {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            background: rgba(0, 0, 0, 0.5);
-            padding: 10px;
-            border-radius: 10px;
-        }
-        .controls button, .controls input[type="range"], .controls a {
-            margin: 0 10px;
-            padding: 10px;
-            border: none;
-            border-radius: 5px;
-            background: #fff;
-            cursor: pointer;
-            text-decoration: none;
-            color: #000;
-        }
-    </style>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Meditate</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Glassmorphism style */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border-radius: 1rem;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+  </style>
 </head>
-<body>
-    <div class="img-container">
-        <img src="{{ image }}" alt="Meditation Image">
+<body class="bg-gradient-to-r from-green-300 to-blue-500 min-h-screen flex flex-col items-center py-8">
+  <nav class="w-full bg-white bg-opacity-90 shadow fixed top-0">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="#" class="text-xl font-bold text-gray-800">Zennova</a>
+      <div class="space-x-4">
+        <a href="index.html" class="text-gray-800 hover:text-gray-600">Home</a>
+        <a href="fitness.html" class="text-gray-800 hover:text-gray-600">Fitness</a>
+        <a href="companion.html" class="text-gray-800 hover:text-gray-600">Well-being Companion</a>
+        <a href="sleeptracker.html" class="text-gray-800 hover:text-gray-600">Sleep Tracker</a>
+      </div>
     </div>
-    <audio id="meditationAudio" src="/{{audio}}" autoplay loop></audio>
-    <div class="controls">
-        <button onclick="document.getElementById('meditationAudio').play()">Play</button>
-        <button onclick="document.getElementById('meditationAudio').pause()">Pause</button>
-        <button onclick="document.getElementById('meditationAudio').currentTime -= 10">Rewind 10s</button>
-        <input type="range" min="0.5" max="2" step="0.1" value="1" onchange="document.getElementById('meditationAudio').playbackRate = this.value">
-        <a href="/{{audio}}" download="meditation.mp3">Download (Tracks will be deleted in 1 day)</a>
+  </nav>
+  <div class="max-w-xl w-full mx-auto p-8 glass-card mt-20">
+    <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">Meditate</h1>
+    <img src="{{ image }}" alt="Meditation Image" class="w-full rounded-md mb-4">
+    <audio id="meditationAudio" src="/{{audio}}" autoplay loop class="hidden"></audio>
+    <div class="flex flex-wrap justify-center items-center space-x-4">
+      <button onclick="document.getElementById('meditationAudio').play()" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-semibold">Play</button>
+      <button onclick="document.getElementById('meditationAudio').pause()" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-semibold">Pause</button>
+      <button onclick="document.getElementById('meditationAudio').currentTime -= 10" class="px-4 py-2 bg-blue-600 text-white rounded-md hover:bg-blue-700 transition-colors font-semibold">Rewind 10s</button>
+      <input type="range" min="0.5" max="2" step="0.1" value="1" onchange="document.getElementById('meditationAudio').playbackRate = this.value" class="w-32">
+      <a href="/{{audio}}" download="meditation.mp3" class="px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors font-semibold">Download (Tracks will be deleted in 1 day)</a>
     </div>
+  </div>
 </body>
 </html>

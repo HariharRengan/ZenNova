@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Fitness Diet Planner</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Custom glassmorphism style for the form container and AI response */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border-radius: 1rem;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-r from-green-300 to-blue-500 min-h-screen flex flex-col items-center py-8">
+  <nav class="w-full bg-white bg-opacity-90 shadow fixed top-0">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="#" class="text-xl font-bold text-gray-800">Zennova</a>
+      <div class="space-x-4">
+        <a href="index.html" class="text-gray-800 hover:text-gray-600">Home</a>
+        <a href="fitness.html" class="text-gray-800 hover:text-gray-600">Fitness</a>
+        <a href="companion.html" class="text-gray-800 hover:text-gray-600">Well-being Companion</a>
+        <a href="sleeptracker.html" class="text-gray-800 hover:text-gray-600">Sleep  Tracker</a>
+      </div>
+    </div>
+  </nav>
+  <!-- Form Container with added margin-top to avoid overlapping the navbar -->
+  <div class="max-w-xl w-full mx-auto p-8 glass-card mt-20">
+    <h1 class="text-3xl font-bold mb-6 text-center text-gray-800">
+      Create Your Personalized Diet Plan
+    </h1>
+    <form id="dietForm" onsubmit="return validateForm(event)" novalidate class="space-y-6">
+      <!-- Fridge Image Input -->
+      <div>
+        <label for="fridgeImage" class="block text-gray-700 font-medium mb-2">
+          Upload a Picture of Your Fridge
+        </label>
+        <input
+          type="file"
+          id="fridgeImage"
+          name="fridgeImage"
+          accept="image/*"
+          class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
+        />
+      </div>
+      <!-- Fridge Description -->
+      <div>
+        <label for="fridgeDescription" class="block text-gray-700 font-medium mb-2">
+          Fridge Description
+        </label>
+        <textarea
+          id="fridgeDescription"
+          name="fridgeDescription"
+          rows="4"
+          placeholder="Describe your fridge contents"
+          class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
+        ></textarea>
+      </div>
+      <!-- Extra Comments -->
+      <div>
+        <label for="extraComments" class="block text-gray-700 font-medium mb-2">
+          Extra Comments
+        </label>
+        <textarea
+          id="extraComments"
+          name="extraComments"
+          rows="3"
+          placeholder="Any additional comments"
+          class="w-full px-4 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200"
+        ></textarea>
+      </div>
+      <!-- Error Message -->
+      <div id="errorMessage" class="text-red-500 text-sm hidden"></div>
+      <!-- Submit Button -->
+      <button
+        type="submit"
+        class="w-full bg-blue-600 text-white py-3 rounded-md hover:bg-blue-700 transition-colors font-semibold"
+      >
+        Submit
+      </button>
+    </form>
+  </div>
+
+  <!-- AI Response Section -->
+  <div id="aiResponseContainer" class="max-w-xl w-full mx-auto p-6 mt-8 glass-card">
+    <h2 class="text-xl font-semibold text-gray-800 mb-2">AI Response</h2>
+    <p id="aiResponseText" class="text-gray-600">
+      Your AI response will appear here...
+    </p>
+  </div>
+
+  <!-- Inline JavaScript Validation -->
+  <script>
+    function validateForm(e) {
+      // Clear any previous error message
+      const errorMessageDiv = document.getElementById("errorMessage");
+      errorMessageDiv.textContent = "";
+      errorMessageDiv.classList.add("hidden");
+
+      // Get the input values
+      const fridgeImageInput = document.getElementById("fridgeImage");
+      const fridgeDescriptionInput = document.getElementById("fridgeDescription");
+
+      const imageProvided =
+        fridgeImageInput.files && fridgeImageInput.files.length > 0;
+      const descriptionProvided =
+        fridgeDescriptionInput.value.trim().length > 0;
+
+      // At least one of these fields must be provided
+      if (!imageProvided && !descriptionProvided) {
+        errorMessageDiv.textContent =
+          "Please provide either a picture of your fridge or a description of its contents.";
+        errorMessageDiv.classList.remove("hidden");
+        e.preventDefault();
+        return false;
+      }
+      return true;
+    }
+  </script>
+</body>
+</html>

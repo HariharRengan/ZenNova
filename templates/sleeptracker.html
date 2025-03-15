@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Sleep Tracker</title>
+  <!-- Tailwind CSS CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    /* Glassmorphism style for containers */
+    .glass-card {
+      background: rgba(255, 255, 255, 0.7);
+      backdrop-filter: blur(10px);
+      border-radius: 1rem;
+      box-shadow: 0 4px 30px rgba(0, 0, 0, 0.1);
+      border: 1px solid rgba(255, 255, 255, 0.3);
+    }
+  </style>
+</head>
+<body class="bg-gradient-to-r from-green-300 to-blue-500 min-h-screen flex flex-col">
+  <!-- Navbar -->
+  <nav class="w-full bg-white bg-opacity-90 shadow fixed top-0">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex justify-between items-center">
+      <a href="#" class="text-xl font-bold text-gray-800">Zennova</a>
+      <div class="space-x-4">
+        <a href="index.html" class="text-gray-800 hover:text-gray-600">Home</a>
+        <a href="fitness.html" class="text-gray-800 hover:text-gray-600">Fitness</a>
+        <a href="companion.html" class="text-gray-800 hover:text-gray-600">Well-being Companion</a>
+        <a href="sleeptracker.html" class="text-gray-800 hover:text-gray-600">Sleep  Tracker</a>
+      </div>
+    </div>
+  </nav>
+
+  <!-- Sleep Tracker Content -->
+  <div class="max-w-4xl w-full mx-auto pt-20 px-4">
+    <h1 class="text-center text-3xl font-bold text-gray-800 mb-8">Your Sleep Data</h1>
+    <!-- Top Row: Hours Slept and Weekly Average -->
+    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mb-8">
+      <div class="glass-card p-6 text-center">
+        <h4 class="text-xl font-semibold text-gray-800 mb-2">Total Hours Slept</h4>
+        <p class="text-4xl font-bold text-gray-700">7.5 hrs</p>
+      </div>
+      <div class="glass-card p-6 text-center">
+        <h4 class="text-xl font-semibold text-gray-800 mb-2">Weekly Sleep Average</h4>
+        <p class="text-4xl font-bold text-gray-700">7.2 hrs</p>
+      </div>
+    </div>
+    
+    <!-- Second Row: Sleep States -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6 mb-8">
+      <div class="glass-card p-6 text-center">
+        <h5 class="text-lg font-semibold text-gray-800 mb-1">Awake</h5>
+        <p class="text-xl text-gray-700">1.0 hr</p>
+      </div>
+      <div class="glass-card p-6 text-center">
+        <h5 class="text-lg font-semibold text-gray-800 mb-1">REM</h5>
+        <p class="text-xl text-gray-700">2.0 hrs</p>
+      </div>
+      <div class="glass-card p-6 text-center">
+        <h5 class="text-lg font-semibold text-gray-800 mb-1">Core</h5>
+        <p class="text-xl text-gray-700">3.0 hrs</p>
+      </div>
+      <div class="glass-card p-6 text-center">
+        <h5 class="text-lg font-semibold text-gray-800 mb-1">Deep</h5>
+        <p class="text-xl text-gray-700">1.5 hrs</p>
+      </div>
+    </div>
+    
+    <!-- AI Summary Section -->
+    <div class="glass-card p-6">
+      <h4 class="text-xl font-semibold text-gray-800 mb-2">AI Summary</h4>
+      <textarea class="w-full p-4 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-blue-200" rows="4" placeholder="Your AI summary will appear here..."></textarea>
+    </div>
+  </div>
+</body>
+</html>

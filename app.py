@@ -53,6 +53,12 @@ def soundtrack_t(track):
 
 @app.route('/meditate')
 def meditate():
+    dwk = c.execute('SELECT * FROM tracks WHERE time < ?', (int(time.time()) - 86400,)).fetchall()
+    for i in dwk:
+        try:
+            os.remove(i[0])
+        except:
+            print('File not found')
     c.execute('DELETE FROM tracks WHERE time < ?', (int(time.time()) - 86400,))
     conn.commit()
     if 'redo' not in session:
@@ -92,6 +98,12 @@ def therapy():
 
 @app.route('/fitness', methods=['GET', 'POST'])
 def fitness():
+    dwk = c.execute('SELECT * FROM workouts WHERE time < ?', (int(time.time()) - 86400,)).fetchall()
+    for i in dwk:
+        try:
+            os.remove(i[0])
+        except:
+            print('File not found')
     c.execute('DELETE FROM workouts WHERE time < ?', (int(time.time()) - 86400,))
     conn.commit()
     if request.method == 'POST':

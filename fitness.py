@@ -1,4 +1,4 @@
-import base64, random, string, time
+import base64, time
 from openai import OpenAI
 from pathlib import Path
 
